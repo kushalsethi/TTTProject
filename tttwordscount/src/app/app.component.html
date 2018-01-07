@@ -1,0 +1,31 @@
+<div align="center">
+  <h1>
+    {{title}}
+  </h1>
+  <label>Enter a number to get top frquently occurring words and their count</label>
+  <br>
+  <br>
+  <input type="text" [(ngModel)]="number" (ngModelChange)="clearWords($event)" placeholder="Enter a number" />
+  <button class="primary btn" type="button" (click)="getWordsCount()">Get Words</button>
+  <br>
+  <br>
+  <div *ngIf="words">
+    <p> Showing top {{number}} frequently occurring words from file</p>
+    <div style="overflow-y:auto; height:250px;">
+      <table border="1">
+        <tr>
+          <th>Word</th>
+          <th>Count</th>
+        </tr>
+        <tr *ngFor="let word of words| keyvalue">
+          <td>{{word.name}}</td>
+          <td>{{word.count}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="error" style="color:red;">
+    <p>Response Code: {{error.httpStatus}}</p>
+    <p>Response Message: {{error.errorMessage}}</p>
+  </div>
+</div>
